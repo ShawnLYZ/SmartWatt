@@ -48,6 +48,51 @@ Everything runs on **your own laptop**. There is no cloud, no account and no sub
 
 ---
 
+# 🏗️ System Architecture
+
+```mermaid
+flowchart TB
+    subgraph Hardware["⚡ Hardware Layer: the monitored power strip"]
+        A["🔌 Clip-on current sensors<br/>SCT-013-005 + SCT-013-020"]
+        B["🔄 9 V AC-AC adapter<br/>voltage reference"]
+        C["📟 ESP32-S3 sensor board<br/>MCP3208 ADC · NILM firmware"]
+        D["🔘 Tasmota smart plugs<br/>optional"]
+    end
+
+    subgraph Laptop["💻 Laptop Layer: Windows, no cloud"]
+        E["📬 Mosquitto MQTT broker<br/>port 1883"]
+        F["⚙️ FastAPI server<br/>ingest · ledger · rules · safety gate"]
+        G["🗃 SQLite<br/>smartwatt.db"]
+        H["💰 Tariff & CO₂ engine<br/>Sarawak Energy Tariff D"]
+        I["📋 appliances.toml<br/>fingerprints.csv"]
+        J["🕒 Windows time server<br/>NTP"]
+        K["🧪 Simulator<br/>optional"]
+    end
+
+    subgraph Client["🖥 Client Layer"]
+        L["🌐 React dashboard<br/>Live · Month · Appliances · Control · Setup"]
+    end
+
+    A -->|"current"| C
+    B -->|"voltage"| C
+    J -->|"clock sync"| C
+    C -->|"MQTT over Wi-Fi hotspot<br/>smartwatt/telemetry · smartwatt/event"| E
+    K -->|"MQTT"| E
+    D -->|"stat/…/POWER"| E
+    E -->|"telemetry · events · plug state"| F
+    F -->|"cmnd/…/POWER<br/>safety gate only"| E
+    E -->|"switch on / off"| D
+
+    F --> G
+    F --> H
+    I <-->|"appliance list · training captures"| F
+    I -.->|"pio uploadfs over USB"| C
+
+    L <-->|"HTTP :8000<br/>REST + WebSocket"| F
+```
+
+---
+
 ## Contents
 
 - [How it works (in plain words)](#how-it-works-in-plain-words)
@@ -418,7 +463,7 @@ Make each connection below and tick it off. "→" means "one wire (or one compon
 
 ![Overview](images/Overview.png)
 
-**Clamp the SCT-013-020 and SCT-013-005 onto the live wire**
+**Clamp the SCT-013-020 and SCT-013-005 onto the Live Wire of Extension Socket**
 
 ![Clamp](images/Clamp.png)
 
