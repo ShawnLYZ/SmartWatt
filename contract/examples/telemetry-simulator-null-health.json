@@ -1,0 +1,15 @@
+{
+  "schema": "smartwatt.telemetry.v1",
+  "ts": 1754035300.0,
+  "source": "simulator",
+  "seq": 42,
+  "fingerprint_id": null,
+  "electrical": {
+    "vrms": 240.0, "irms": 0.0, "p": 0.0, "q1": 0.0, "dist": 0.0,
+    "s": 0.0, "pf_true": 1.0, "pf_disp": 1.0, "freq": 50.0,
+    "range": "low"
+  },
+  "attribution": { "active": [], "residual_w": 0.0, "floor_w": 6.0 },
+  "energy": { "wh_session": 0.0, "wh_today": 0.0 },
+  "health": null
+}

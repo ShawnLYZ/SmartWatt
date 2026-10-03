@@ -1,0 +1,24 @@
+{
+  "schema": "smartwatt.event.v1",
+  "ts": 1754035188.412,
+  "source": "device",
+  "seq": 87,
+  "edge": "on",
+  "label": "kettle",
+  "confidence": 0.94,
+  "rejected": false,
+  "ambiguous": false,
+  "reason": null,
+  "attributed_to": "kettle",
+  "features": {
+    "delta_p": 848.2, "delta_q1": 31.1, "delta_dist": 12.4, "delta_s": 848.8,
+    "pf_disp": 0.999, "pf_true": 0.992, "delta_irms": 3.544, "delta_crest": 1.414,
+    "h3_h1": 0.021, "h5_h1": 0.009, "h7_h1": 0.004,
+    "inrush_ratio": 1.02, "settle_cycles": 3, "log_delta_p": 6.744
+  },
+  "neighbours": [
+    { "label": "kettle", "distance": 0.31, "training_id": "kettle-on-004" },
+    { "label": "kettle", "distance": 0.44, "training_id": "kettle-on-011" },
+    { "label": "kettle", "distance": 0.52, "training_id": "kettle-on-002" }
+  ]
+}

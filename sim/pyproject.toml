@@ -1,0 +1,18 @@
+[project]
+name = "smartwatt-sim"
+version = "0.1.0"
+requires-python = ">=3.12"
+dependencies = [
+    "paho-mqtt>=2.1.0",
+    "jsonschema>=4.23.0",
+]
+
+[project.scripts]
+sim = "smartwatt_sim.cli:main"
+
+[dependency-groups]
+dev = ["pytest>=8.3.0"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"

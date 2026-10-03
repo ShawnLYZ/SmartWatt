@@ -1,0 +1,57 @@
+# The EXAMPLE household, as an appliance file: registry._DEFAULTS plus
+# rules.LEFT_ON_TARGETS/STANDBY_TARGETS plus wizard.TRAINED_CLASSES.
+#
+# conftest.py points every server test at THIS file, never at the repository
+# root's appliances.toml, which belongs to whoever is running SmartWatt and
+# will not hold these five for long. test_appliances.py pins this file to the
+# Python definitions above, so the two cannot drift apart.
+
+[[appliance]]
+id = "kettle"
+name = "Kettle"
+plug = "plug_kettle"
+protected = false
+heating = true
+train = true
+left_on_rule = false
+standby_rule = false
+
+[[appliance]]
+id = "desk_fan"
+name = "Desk fan"
+plug = ""
+protected = false
+heating = false
+train = true
+left_on_rule = false
+standby_rule = true
+
+[[appliance]]
+id = "incandescent_lamp"
+name = "Incandescent lamp"
+plug = "plug_lamp"
+protected = false
+heating = false
+train = true
+left_on_rule = true
+standby_rule = true
+
+[[appliance]]
+id = "led_bulb"
+name = "LED bulb"
+plug = "plug_led"
+protected = false
+heating = false
+train = true
+left_on_rule = false
+standby_rule = true
+
+[[appliance]]
+id = "laptop_charger"
+name = "Laptop charger"
+plug = "plug_laptop"
+protected = true
+heating = false
+train = true
+left_on_rule = false
+standby_rule = false

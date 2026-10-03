@@ -1,0 +1,66 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://smartwatt.local/schemas/event.schema.json",
+  "title": "SmartWatt switching event",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "ts", "source", "seq", "edge", "label", "confidence",
+               "rejected", "ambiguous", "reason", "attributed_to",
+               "features", "neighbours"],
+  "properties": {
+    "schema": { "const": "smartwatt.event.v1" },
+    "ts":     { "type": "number" },
+    "source": { "enum": ["device", "simulator", "replay"] },
+    "seq":    { "type": "integer", "minimum": 0 },
+    "edge":   { "enum": ["on", "off"] },
+    "label":          { "type": ["string", "null"] },
+    "confidence":     { "type": "number", "minimum": 0, "maximum": 1 },
+    "rejected":       { "type": "boolean" },
+    "ambiguous":      { "type": "boolean" },
+    "reason": {
+      "type": ["string", "null"],
+      "enum": [null, "below_floor", "no_settle",
+               "overlapping_edges", "distance_threshold"]
+    },
+    "attributed_to":  { "type": ["string", "null"] },
+    "features": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["delta_p", "delta_q1", "delta_dist", "delta_s",
+                   "pf_disp", "pf_true", "delta_irms", "delta_crest",
+                   "h3_h1", "h5_h1", "h7_h1",
+                   "inrush_ratio", "settle_cycles", "log_delta_p"],
+      "properties": {
+        "delta_p":       { "type": "number", "minimum": 0 },
+        "delta_q1":      { "type": "number", "minimum": 0 },
+        "delta_dist":    { "type": "number", "minimum": 0 },
+        "delta_s":       { "type": "number", "minimum": 0 },
+        "pf_disp":       { "type": "number", "minimum": -1, "maximum": 1 },
+        "pf_true":       { "type": "number", "minimum": -1, "maximum": 1 },
+        "delta_irms":    { "type": "number", "minimum": 0 },
+        "delta_crest":   { "type": "number", "minimum": 0 },
+        "h3_h1":         { "type": "number", "minimum": 0 },
+        "h5_h1":         { "type": "number", "minimum": 0 },
+        "h7_h1":         { "type": "number", "minimum": 0 },
+        "inrush_ratio":  { "type": "number", "minimum": 0 },
+        "settle_cycles": { "type": "integer", "minimum": 0 },
+        "log_delta_p":   { "type": "number" }
+      }
+    },
+    "neighbours": {
+      "type": "array",
+      "minItems": 3,
+      "maxItems": 3,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["label", "distance", "training_id"],
+        "properties": {
+          "label":       { "type": "string" },
+          "distance":    { "type": "number", "minimum": 0 },
+          "training_id": { "type": "string" }
+        }
+      }
+    }
+  }
+}

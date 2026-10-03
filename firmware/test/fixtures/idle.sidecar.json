@@ -1,0 +1,28 @@
+{
+  "active": [],
+  "v_rms": 240.0,
+  "v_rms_total": 240.0,
+  "freq": 50.0,
+  "cycles": 8,
+  "sample_rate_hz": 4000.0,
+  "distorted_v": false,
+  "p": 0.0,
+  "q1": -0.0,
+  "dist": 0.0,
+  "s": 0.0,
+  "irms": 0.0,
+  "pf_true": 1.0,
+  "pf_disp": 1.0,
+  "crest": 0.0,
+  "harmonic_rms": {},
+  "dist_from_spectrum": 0.0,
+  "cross_derivation_holds": true,
+  "calibration": {
+    "v_cal": 0.2006,
+    "i_cal_low": 0.0040283,
+    "i_cal_high": 0.016113,
+    "adc_mid": 2048,
+    "adc_max": 4095
+  },
+  "name": "idle"
+}

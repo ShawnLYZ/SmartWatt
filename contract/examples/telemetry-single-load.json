@@ -1,0 +1,19 @@
+{
+  "schema": "smartwatt.telemetry.v1",
+  "ts": 1754035200.0,
+  "source": "device",
+  "seq": 12345,
+  "fingerprint_id": "a3f19c2e",
+  "electrical": {
+    "vrms": 239.4, "irms": 3.812, "p": 902.5, "q1": 118.3, "dist": 41.2,
+    "s": 912.6, "pf_true": 0.989, "pf_disp": 0.997, "freq": 49.98,
+    "range": "high"
+  },
+  "attribution": {
+    "active": [{ "id": "kettle", "w": 848.0, "since": 1754035188.0 }],
+    "residual_w": 54.5,
+    "floor_w": 8.5
+  },
+  "energy": { "wh_session": 4231.7, "wh_today": 1204.3 },
+  "health": { "isr_overruns": 0, "worst_isr_us": 41, "cycles_dropped": 2 }
+}

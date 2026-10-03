@@ -1,0 +1,109 @@
+# Appliances are defined by HARMONIC CURRENT PHASORS, not by a power figure.
+#
+# phase is the lag of the current harmonic behind the voltage fundamental,
+# in radians. i_rms is amps rms at that harmonic order.
+#
+# This is what lets one model serve both output modes and makes composition
+# physically correct: phasors superpose across parallel loads, and distortion
+# power does not. Summing per-appliance power figures would reintroduce
+# exactly the error PRD.md corrects in the signal chain section.
+#
+# Reference mains: 240.0 V rms, 50.0 Hz.
+
+[kettle]
+trained   = true
+protected = false
+heating   = true
+inrush_ratio        = 1.02
+inrush_decay_cycles = 3
+settle_cycles       = 3
+harmonics = [
+  { h = 1, i_rms = 7.500, phase = 0.020 },
+  { h = 3, i_rms = 0.038, phase = 0.100 },
+  { h = 5, i_rms = 0.015, phase = 0.200 },
+]
+
+[desk_fan]
+trained   = true
+protected = false
+heating   = false
+inrush_ratio        = 2.40
+inrush_decay_cycles = 8
+settle_cycles       = 7
+harmonics = [
+  { h = 1, i_rms = 0.240, phase = 0.620 },
+  { h = 3, i_rms = 0.021, phase = 0.900 },
+  { h = 5, i_rms = 0.009, phase = 1.200 },
+  { h = 7, i_rms = 0.004, phase = 1.500 },
+]
+
+[incandescent_lamp]
+trained   = true
+protected = false
+heating   = false
+inrush_ratio        = 6.50
+inrush_decay_cycles = 4
+settle_cycles       = 2
+harmonics = [
+  { h = 1, i_rms = 0.1667, phase = 0.004 },
+  { h = 3, i_rms = 0.0007, phase = 0.010 },
+]
+
+[led_bulb]
+trained   = true
+protected = false
+heating   = false
+inrush_ratio        = 1.30
+inrush_decay_cycles = 2
+settle_cycles       = 4
+harmonics = [
+  { h = 1, i_rms = 0.0375, phase = 1.047 },
+  { h = 3, i_rms = 0.0180, phase = 1.400 },
+  { h = 5, i_rms = 0.0110, phase = 1.900 },
+  { h = 7, i_rms = 0.0070, phase = 2.400 },
+]
+
+[laptop_charger]
+trained   = true
+protected = true
+heating   = false
+inrush_ratio        = 1.45
+inrush_decay_cycles = 3
+settle_cycles       = 5
+harmonics = [
+  { h = 1, i_rms = 0.2760, phase = 0.180 },
+  { h = 3, i_rms = 0.0640, phase = 0.600 },
+  { h = 5, i_rms = 0.0290, phase = 1.100 },
+  { h = 7, i_rms = 0.0150, phase = 1.600 },
+]
+
+# --- deliberately untrained ------------------------------------------------
+# phone_charger tests the detection floor.
+# clothes_iron's self-cycling thermostat makes it the most demanding
+# untrained load available.
+
+[phone_charger]
+trained   = false
+protected = false
+heating   = false
+inrush_ratio        = 1.20
+inrush_decay_cycles = 2
+settle_cycles       = 4
+harmonics = [
+  { h = 1, i_rms = 0.0200, phase = 1.100 },
+  { h = 3, i_rms = 0.0105, phase = 1.500 },
+  { h = 5, i_rms = 0.0062, phase = 2.000 },
+  { h = 7, i_rms = 0.0038, phase = 2.500 },
+]
+
+[clothes_iron]
+trained   = false
+protected = false
+heating   = true
+inrush_ratio        = 1.03
+inrush_decay_cycles = 3
+settle_cycles       = 3
+harmonics = [
+  { h = 1, i_rms = 4.5800, phase = 0.015 },
+  { h = 3, i_rms = 0.0230, phase = 0.090 },
+]

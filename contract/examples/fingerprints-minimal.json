@@ -1,0 +1,36 @@
+{
+  "schema": "smartwatt.fingerprints.v1",
+  "fingerprint_id": "a3f19c2e",
+  "rejection_threshold": 3.42,
+  "active_features": ["delta_p", "delta_q1", "delta_dist", "delta_s",
+                      "pf_disp", "pf_true", "delta_irms", "delta_crest",
+                      "h3_h1", "h5_h1", "h7_h1",
+                      "inrush_ratio", "settle_cycles", "log_delta_p"],
+  "normalisation": {
+    "mean": {
+      "delta_p": 392.4, "delta_q1": 28.9, "delta_dist": 17.2, "delta_s": 398.1,
+      "pf_disp": 0.972, "pf_true": 0.951, "delta_irms": 1.652, "delta_crest": 1.688,
+      "h3_h1": 0.081, "h5_h1": 0.041, "h7_h1": 0.020,
+      "inrush_ratio": 1.14, "settle_cycles": 3.4, "log_delta_p": 4.812
+    },
+    "std": {
+      "delta_p": 610.2, "delta_q1": 21.4, "delta_dist": 14.8, "delta_s": 612.9,
+      "pf_disp": 0.029, "pf_true": 0.048, "delta_irms": 2.541, "delta_crest": 0.312,
+      "h3_h1": 0.094, "h5_h1": 0.052, "h7_h1": 0.028,
+      "inrush_ratio": 0.19, "settle_cycles": 1.6, "log_delta_p": 1.744
+    }
+  },
+  "rows": [
+    {
+      "training_id": "kettle-on-001",
+      "label": "kettle",
+      "edge": "on",
+      "features": {
+        "delta_p": 1798.4, "delta_q1": 30.2, "delta_dist": 11.9, "delta_s": 1798.7,
+        "pf_disp": 0.9999, "pf_true": 0.9998, "delta_irms": 7.494, "delta_crest": 1.414,
+        "h3_h1": 0.005, "h5_h1": 0.002, "h7_h1": 0.001,
+        "inrush_ratio": 1.02, "settle_cycles": 3, "log_delta_p": 7.495
+      }
+    }
+  ]
+}

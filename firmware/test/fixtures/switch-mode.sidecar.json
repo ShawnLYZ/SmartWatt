@@ -1,0 +1,35 @@
+{
+  "active": [
+    "led_bulb"
+  ],
+  "v_rms": 240.0,
+  "v_rms_total": 240.0,
+  "freq": 50.0,
+  "cycles": 8,
+  "sample_rate_hz": 4000.0,
+  "distorted_v": false,
+  "p": 4.501539671373631,
+  "q1": 7.793339501590405,
+  "dist": 5.334266585014288,
+  "s": 10.462045689061007,
+  "irms": 0.04359185703775419,
+  "pf_true": 0.43027337149563283,
+  "pf_disp": 0.5001710745970701,
+  "crest": 2.135494537979235,
+  "harmonic_rms": {
+    "1": 0.0375,
+    "3": 0.018,
+    "5": 0.011,
+    "7": 0.007
+  },
+  "dist_from_spectrum": 5.334266585014288,
+  "cross_derivation_holds": true,
+  "calibration": {
+    "v_cal": 0.2006,
+    "i_cal_low": 0.0040283,
+    "i_cal_high": 0.016113,
+    "adc_mid": 2048,
+    "adc_max": 4095
+  },
+  "name": "switch-mode"
+}

@@ -1,0 +1,24 @@
+{
+  "schema": "smartwatt.event.v1",
+  "ts": 1754035700.310,
+  "source": "device",
+  "seq": 90,
+  "edge": "on",
+  "label": null,
+  "confidence": 0.0,
+  "rejected": false,
+  "ambiguous": true,
+  "reason": "overlapping_edges",
+  "attributed_to": null,
+  "features": {
+    "delta_p": 89.4, "delta_q1": 22.8, "delta_dist": 14.1, "delta_s": 93.4,
+    "pf_disp": 0.969, "pf_true": 0.957, "delta_irms": 0.389, "delta_crest": 1.610,
+    "h3_h1": 0.062, "h5_h1": 0.031, "h7_h1": 0.014,
+    "inrush_ratio": 1.11, "settle_cycles": 0, "log_delta_p": 4.504
+  },
+  "neighbours": [
+    { "label": "laptop_charger",    "distance": 2.10, "training_id": "laptop_charger-on-001" },
+    { "label": "desk_fan",          "distance": 2.44, "training_id": "desk_fan-on-002" },
+    { "label": "incandescent_lamp", "distance": 2.87, "training_id": "incandescent_lamp-on-004" }
+  ]
+}

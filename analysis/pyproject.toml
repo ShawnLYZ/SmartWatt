@@ -1,0 +1,19 @@
+[project]
+name = "smartwatt-analysis"
+version = "0.1.0"
+requires-python = ">=3.12"
+dependencies = [
+    "numpy>=2.1.0",
+    "scikit-learn>=1.6.0",
+    "matplotlib>=3.10.0",
+]
+
+[project.scripts]
+analyse = "smartwatt_analysis.cli:main"
+
+[dependency-groups]
+dev = ["pytest>=8.3.0"]
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"

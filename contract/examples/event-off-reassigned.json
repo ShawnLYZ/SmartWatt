@@ -1,0 +1,24 @@
+{
+  "schema": "smartwatt.event.v1",
+  "ts": 1754035500.128,
+  "source": "device",
+  "seq": 88,
+  "edge": "off",
+  "label": "desk_fan",
+  "confidence": 0.61,
+  "rejected": false,
+  "ambiguous": false,
+  "reason": null,
+  "attributed_to": "incandescent_lamp",
+  "features": {
+    "delta_p": 40.1, "delta_q1": 1.2, "delta_dist": 0.6, "delta_s": 40.2,
+    "pf_disp": 0.999, "pf_true": 0.998, "delta_irms": 0.167, "delta_crest": 1.414,
+    "h3_h1": 0.004, "h5_h1": 0.002, "h7_h1": 0.001,
+    "inrush_ratio": 1.00, "settle_cycles": 2, "log_delta_p": 3.716
+  },
+  "neighbours": [
+    { "label": "desk_fan",          "distance": 0.72, "training_id": "desk_fan-off-003" },
+    { "label": "incandescent_lamp", "distance": 0.78, "training_id": "incandescent_lamp-off-007" },
+    { "label": "incandescent_lamp", "distance": 0.91, "training_id": "incandescent_lamp-off-001" }
+  ]
+}

@@ -1,0 +1,63 @@
+/* Self-hosted. These import font FILES from node_modules, not a CDN. */
+@import "@fontsource-variable/ibm-plex-sans";
+@import "@fontsource/ibm-plex-mono/400.css";
+@import "@fontsource/ibm-plex-mono/600.css";
+
+@import "tailwindcss";
+
+/*
+ * Design direction: a utility bill, not a dashboard.
+ * Institutional, quiet, numerate. Rules rather than cards, no shadows,
+ * no rounded panels. Structure comes from alignment.
+ *
+ * ONE accent colour, used ONLY for ringgit. kWh, watts, volts, hertz and
+ * kg CO2e are all ink - money is the unit decisions are made in, so money
+ * is the only thing that gets colour.
+ */
+@theme {
+  --color-paper: #faf9f6;
+  --color-ink: #16150f;
+  --color-ink-muted: #6b6a61;
+  --color-rule: #d8d5cb;
+  --color-rule-strong: #16150f;
+
+  /* The accent. Ringgit only. */
+  --color-ringgit: #8c2f0d;
+
+  /* Carbon sits in a tinted field, present and sourced, not shouted. */
+  --color-carbon-field: #eef1ec;
+
+  --color-warn: #8a6d1f;
+  --color-stale: #9a9a92;
+
+  --font-sans: "IBM Plex Sans Variable", system-ui, sans-serif;
+  --font-mono: "IBM Plex Mono", ui-monospace, monospace;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+}
+
+body {
+  background: var(--color-paper);
+  color: var(--color-ink);
+  font-family: var(--font-sans);
+  -webkit-font-smoothing: antialiased;
+}
+
+/*
+ * Every number is tabular. Figures update at 1 Hz and digits that change
+ * width make the whole page jitter.
+ */
+.figure {
+  font-family: var(--font-mono);
+  font-variant-numeric: tabular-nums;
+  letter-spacing: -0.01em;
+}
+
+/* Hairline rules carry the structure. */
+.rule-t { border-top: 1px solid var(--color-rule); }
+.rule-b { border-bottom: 1px solid var(--color-rule); }
+.rule-strong { border-bottom: 2px solid var(--color-rule-strong); }

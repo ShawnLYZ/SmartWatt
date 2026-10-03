@@ -1,0 +1,4 @@
+# Waveform fixtures are consumed byte-for-byte by S5a's firmware, which
+# parses them in C. Git must not rewrite their line endings on checkout.
+firmware/test/fixtures/*.csv -text
+firmware/test/fixtures/*.sidecar.json -text

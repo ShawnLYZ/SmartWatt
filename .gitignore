@@ -1,0 +1,29 @@
+# Build output and tool caches
+__pycache__/
+*.pyc
+.venv/
+node_modules/
+dist/
+.pio/
+server/static/
+.hypothesis/
+.pytest_cache/
+.DS_Store
+
+# Working notes and design documents kept out of the public repository
+Hardware.md
+PRD.md
+Problem Statement.md
+SmartWatt.md
+docs/
+
+# Your own data: measurements, recordings and the trained table stay on
+# your computer and are never uploaded.
+*.db
+*.db-shm
+*.db-wal
+*.sqlite3
+*.log
+captures/
+logs/
+firmware/data/

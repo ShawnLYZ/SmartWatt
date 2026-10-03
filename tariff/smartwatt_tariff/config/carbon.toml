@@ -1,0 +1,62 @@
+# Grid emission factors, kg CO2e per kWh.
+#
+# Peninsular and Sabah were recalculated by the publishing authority; the
+# draft document's 0.774 and 0.525 are stale.
+
+[[factors]]
+region      = "sarawak"
+kg_per_kwh  = "0.199"
+provisional = true
+source      = "Energy Commission - Grid Emission Factor (GEF) in Malaysia, 2022-2024 (Provisional)"
+url         = "https://www.st.gov.my/"
+vintage     = "2024 (provisional)"
+
+[[factors]]
+region      = "peninsular"
+kg_per_kwh  = "0.740"
+provisional = true
+source      = "Energy Commission - Grid Emission Factor (GEF) in Malaysia, 2022-2024 (Provisional)"
+url         = "https://www.st.gov.my/"
+vintage     = "2024 (provisional)"
+
+[[factors]]
+region      = "sabah"
+kg_per_kwh  = "0.539"
+provisional = true
+source      = "Energy Commission - Grid Emission Factor (GEF) in Malaysia, 2022-2024 (Provisional)"
+url         = "https://www.st.gov.my/"
+vintage     = "2024 (provisional)"
+
+# Peninsular Malaysia's factor is falling while Sarawak's holds flat, so the
+# transferability argument depreciates each year. Publishing the trend is
+# more credible than publishing a round multiple that does not move.
+[peninsular_trend]
+2022 = "0.769"
+2023 = "0.760"
+2024 = "0.740"
+
+[framings]
+# Presented QUALITATIVELY. PRD forbids inventing a marginal-intensity
+# number, and there is deliberately no numeric field here to put one in.
+displaced = """
+Reducing consumption displaces whichever generation is at the margin at that
+moment. SmartWatt does not publish a marginal-intensity figure because it
+does not have access to dispatch data, and inventing one would misrepresent
+a guess as a measurement.
+"""
+
+# US35: stating this plainly shows the project is not inflating its impact.
+cleaner_grid = """
+Sarawak's grid is already substantially cleaner than Peninsular Malaysia's -
+0.199 against 0.740 kg CO2e per kWh. A kilowatt-hour saved here avoids
+roughly 3.7 times less carbon than the same saving in the Peninsula.
+"""
+
+# US34: an equivalence, not an emission factor. Omit the key entirely
+# rather than supplying an unsourced number - carbon.tree_year_kg then
+# returns None and the dashboard simply renders no equivalence line.
+[equivalence]
+# tree_year_kg = "..."
+# source  = "..."
+# url     = "..."
+# vintage = "..."

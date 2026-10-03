@@ -1,0 +1,31 @@
+[project]
+name = "smartwatt-server"
+version = "0.1.0"
+requires-python = ">=3.12"
+dependencies = [
+    "fastapi>=0.115.0",
+    "uvicorn[standard]>=0.32.0",
+    "paho-mqtt>=2.1.0",
+    "jsonschema>=4.23.0",
+    "smartwatt-tariff",
+    "smartwatt-analysis",
+]
+
+[dependency-groups]
+dev = [
+    "pytest>=8.3.0",
+    "httpx>=0.28.0",
+    "httpx2>=2.10.0",
+    "pytest-asyncio>=0.24.0",
+    "smartwatt-sim",
+    "hypothesis>=6.122.0",
+]
+
+[tool.uv.sources]
+smartwatt-tariff = { workspace = true }
+smartwatt-sim = { workspace = true }
+smartwatt-analysis = { workspace = true }
+
+[build-system]
+requires = ["hatchling"]
+build-backend = "hatchling.build"

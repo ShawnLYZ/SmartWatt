@@ -1,0 +1,76 @@
+# Sarawak Energy Tariff D (Domestic).
+#
+# FLAT-BAND, NOT PROGRESSIVE-BLOCK. Total monthly consumption selects one
+# rate, and that rate applies to EVERY unit used that month. Every Malaysian
+# energy calculator assumes the Peninsular progressive-block model and gets
+# this wrong.
+#
+# All money values are STRINGS. TOML has native floats, and a float that
+# reaches a bill path defeats the Decimal discipline entirely.
+#
+# Re-verify every figure against a current bill before any public
+# demonstration. The vintage field is what makes staleness visible.
+
+[provenance]
+source  = "Sarawak Energy - Domestic Tariff Schedule (Tariff D)"
+url     = "https://www.sarawakenergy.com/customer-care/tariffs"
+vintage = "2026"
+
+# up_to_kwh is the INCLUSIVE upper bound of the band.
+# The final band has no upper bound.
+[[bands]]
+up_to_kwh   = "100"
+sen_per_kwh = "18.0"
+
+[[bands]]
+up_to_kwh   = "150"
+sen_per_kwh = "18.0"
+
+[[bands]]
+up_to_kwh   = "200"
+sen_per_kwh = "22.0"
+
+[[bands]]
+up_to_kwh   = "300"
+sen_per_kwh = "25.0"
+
+[[bands]]
+up_to_kwh   = "400"
+sen_per_kwh = "27.0"
+
+[[bands]]
+up_to_kwh   = "500"
+sen_per_kwh = "29.5"
+
+[[bands]]
+up_to_kwh   = "700"
+sen_per_kwh = "30.0"
+
+[[bands]]
+up_to_kwh   = "800"
+sen_per_kwh = "30.5"
+
+[[bands]]
+up_to_kwh   = "1300"
+sen_per_kwh = "31.0"
+
+[[bands]]
+sen_per_kwh = "31.5"
+
+[charges]
+minimum_monthly_rm     = "5.00"
+# 8%, in force since 1 March 2024. The draft left this ambiguous.
+service_tax_rate       = "0.08"
+service_tax_exempt_kwh = "600"
+# Guarded, never prorated. The product only evaluates whole Asia/Kuching
+# calendar months (28-31 days), so this never binds - but a caller passing
+# a shorter period raises rather than producing a figure whose service-tax
+# semantics are unresolved.
+minimum_billing_days   = 28
+
+[discount]
+rate = "0.25"
+# TOTAL, not energy alone. The draft's energy-only base was wrong.
+base = "total"
+effective_from = 2026-04-01
+effective_to   = 2026-12-31

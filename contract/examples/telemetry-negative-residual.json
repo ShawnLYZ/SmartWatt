@@ -1,0 +1,19 @@
+{
+  "schema": "smartwatt.telemetry.v1",
+  "ts": 1754035260.0,
+  "source": "device",
+  "seq": 12405,
+  "fingerprint_id": "a3f19c2e",
+  "electrical": {
+    "vrms": 240.1, "irms": 0.201, "p": 44.9, "q1": 21.7, "dist": 8.1,
+    "s": 48.3, "pf_true": 0.930, "pf_disp": 0.900, "freq": 50.01,
+    "range": "low"
+  },
+  "attribution": {
+    "active": [{ "id": "desk_fan", "w": 46.2, "since": 1754035100.0 }],
+    "residual_w": -1.3,
+    "floor_w": 8.5
+  },
+  "energy": { "wh_session": 4232.5, "wh_today": 1205.1 },
+  "health": { "isr_overruns": 0, "worst_isr_us": 39, "cycles_dropped": 2 }
+}

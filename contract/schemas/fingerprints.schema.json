@@ -1,0 +1,77 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://smartwatt.local/schemas/fingerprints.schema.json",
+  "title": "SmartWatt classifier table push",
+  "description": "Retained on smartwatt/fingerprints, server to device. Consumed by S8.",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "fingerprint_id", "rows", "normalisation",
+               "rejection_threshold", "active_features"],
+  "properties": {
+    "schema":         { "const": "smartwatt.fingerprints.v1" },
+    "fingerprint_id": { "type": "string", "pattern": "^[0-9a-f]{8}$" },
+    "rejection_threshold": { "type": "number", "exclusiveMinimum": 0 },
+    "active_features": {
+      "type": "array",
+      "minItems": 1,
+      "maxItems": 14,
+      "uniqueItems": true,
+      "items": {
+        "enum": ["delta_p", "delta_q1", "delta_dist", "delta_s",
+                 "pf_disp", "pf_true", "delta_irms", "delta_crest",
+                 "h3_h1", "h5_h1", "h7_h1",
+                 "inrush_ratio", "settle_cycles", "log_delta_p"]
+      }
+    },
+    "normalisation": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["mean", "std"],
+      "properties": {
+        "mean": { "$ref": "#/$defs/feature_map" },
+        "std":  { "$ref": "#/$defs/feature_map" }
+      }
+    },
+    "rows": {
+      "type": "array",
+      "minItems": 1,
+      "items": {
+        "type": "object",
+        "additionalProperties": false,
+        "required": ["training_id", "label", "edge", "features"],
+        "properties": {
+          "training_id": { "type": "string" },
+          "label":       { "type": "string" },
+          "edge":        { "enum": ["on", "off"] },
+          "features":    { "$ref": "#/$defs/feature_map" }
+        }
+      }
+    }
+  },
+  "$defs": {
+    "feature_map": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["delta_p", "delta_q1", "delta_dist", "delta_s",
+                   "pf_disp", "pf_true", "delta_irms", "delta_crest",
+                   "h3_h1", "h5_h1", "h7_h1",
+                   "inrush_ratio", "settle_cycles", "log_delta_p"],
+      "properties": {
+        "delta_p":       { "type": "number" },
+        "delta_q1":      { "type": "number" },
+        "delta_dist":    { "type": "number" },
+        "delta_s":       { "type": "number" },
+        "pf_disp":       { "type": "number" },
+        "pf_true":       { "type": "number" },
+        "delta_irms":    { "type": "number" },
+        "delta_crest":   { "type": "number" },
+        "h3_h1":         { "type": "number" },
+        "h5_h1":         { "type": "number" },
+        "h7_h1":         { "type": "number" },
+        "inrush_ratio":  { "type": "number" },
+        "settle_cycles": { "type": "number" },
+        "log_delta_p":   { "type": "number" }
+      }
+    }
+  }
+}

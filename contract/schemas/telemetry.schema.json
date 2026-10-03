@@ -1,0 +1,89 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://smartwatt.local/schemas/telemetry.schema.json",
+  "title": "SmartWatt telemetry",
+  "type": "object",
+  "additionalProperties": false,
+  "required": ["schema", "ts", "source", "seq", "fingerprint_id",
+               "electrical", "attribution", "energy", "health"],
+  "properties": {
+    "schema": { "const": "smartwatt.telemetry.v1" },
+    "ts": { "type": "number", "description": "float epoch seconds UTC" },
+    "source": { "enum": ["device", "simulator", "replay"] },
+    "seq": { "type": "integer", "minimum": 0 },
+    "fingerprint_id": {
+      "type": ["string", "null"],
+      "pattern": "^[0-9a-f]{8}$"
+    },
+    "electrical": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["vrms", "irms", "p", "q1", "dist", "s",
+                   "pf_true", "pf_disp", "freq", "range"],
+      "properties": {
+        "vrms":    { "type": "number", "minimum": 0 },
+        "irms":    { "type": "number", "minimum": 0 },
+        "p":       { "type": "number" },
+        "q1":      { "type": "number" },
+        "dist":    { "type": "number", "minimum": 0 },
+        "s":       { "type": "number", "minimum": 0 },
+        "pf_true": { "type": "number", "minimum": -1, "maximum": 1 },
+        "pf_disp": { "type": "number", "minimum": -1, "maximum": 1 },
+        "freq":    { "type": "number", "minimum": 0 },
+        "range":   { "enum": ["low", "high"] }
+      }
+    },
+    "attribution": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["active", "residual_w", "floor_w"],
+      "properties": {
+        "active": {
+          "type": "array",
+          "items": {
+            "type": "object",
+            "additionalProperties": false,
+            "required": ["id", "w", "since"],
+            "properties": {
+              "id": {
+                "type": "string",
+                "pattern": "^([a-z][a-z0-9_]*|unknown_[0-9]+)$",
+                "not": { "const": "__residual__" }
+              },
+              "w":     { "type": "number" },
+              "since": { "type": "number" }
+            }
+          }
+        },
+        "residual_w": { "type": "number" },
+        "floor_w":    { "type": "number", "minimum": 0 }
+      }
+    },
+    "energy": {
+      "type": "object",
+      "additionalProperties": false,
+      "required": ["wh_session", "wh_today"],
+      "properties": {
+        "wh_session": { "type": "number", "minimum": 0 },
+        "wh_today":   { "type": "number", "minimum": 0 }
+      }
+    },
+    "health": {
+      "type": ["object", "null"],
+      "additionalProperties": false,
+      "required": ["isr_overruns", "worst_isr_us", "cycles_dropped"],
+      "properties": {
+        "isr_overruns":   { "type": "integer", "minimum": 0 },
+        "worst_isr_us":   { "type": "integer", "minimum": 0 },
+        "cycles_dropped": { "type": "integer", "minimum": 0 }
+      }
+    }
+  },
+  "allOf": [
+    {
+      "if":   { "properties": { "source": { "const": "device" } } },
+      "then": { "properties": { "health": { "type": "object" } } },
+      "else": { "properties": { "health": { "type": "null" } } }
+    }
+  ]
+}

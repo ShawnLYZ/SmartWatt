@@ -1,0 +1,113 @@
+# =============================================================================
+#  SmartWatt: YOUR APPLIANCES
+# =============================================================================
+#
+#  This is the one file you change to use SmartWatt with your own appliances.
+#  Open it with Notepad, edit it, save it, then restart the SmartWatt server.
+#
+#  It ships with five EXAMPLE appliances. Replace them with your own: change
+#  the values, delete blocks you don't need, and copy a block to add more.
+#  README.md, "Part 7", explains each step.
+#
+#  Rules for writing this file:
+#    * Every appliance starts with a line reading  [[appliance]]
+#    * Text goes inside "quote marks".
+#    * true and false are lowercase, with NO quote marks.
+#    * A line starting with # is a note for humans. SmartWatt ignores it.
+#
+#  What each line means:
+#
+#    id           A short code name. Only lowercase letters a-z, digits 0-9
+#                 and underscores _, starting with a letter, at most 23
+#                 characters. No spaces. Examples: "rice_cooker", "tv_2".
+#                 Choose it before training and don't change it afterwards:
+#                 the training data is saved under this name.
+#
+#    name         The name the dashboard shows. Anything you like.
+#
+#    plug         The Tasmota "Topic" of the smart plug this appliance is
+#                 plugged into, for example "plug_fan". Leave it as "" if the
+#                 appliance is not on a smart plug. One plug = one appliance.
+#
+#    protected    true  = SmartWatt will NEVER switch it off, not even when
+#                         you press a button. Use it for anything that must
+#                         stay on: fridge, router, medical equipment.
+#                 false = it may be switched off.
+#
+#    heating      true  = SmartWatt may switch it OFF but will never switch
+#                         it ON (kettle, iron, heater, rice cooker): nothing
+#                         that gets hot is ever started remotely.
+#                 false = an ordinary appliance.
+#
+#    train        true  = the Setup screen asks you to teach SmartWatt this
+#                         appliance's electrical "fingerprint".
+#                 false = don't train it.
+#
+#    left_on_rule  true = if it stays on for 4 hours, SmartWatt warns you and,
+#                         unless you press Cancel within 60 seconds, switches
+#                         it off. Needs a plug, and can't be used together with
+#                         protected = true.
+#
+#    standby_rule  true = if it sits drawing a small standby power (1-12 W)
+#                         for 6 hours, SmartWatt warns and then switches it
+#                         off the same way. Needs a plug, and can't be used
+#                         together with protected = true.
+#
+#  If you make a mistake, the server window says exactly which appliance and
+#  which line to fix, and does not start until it is fixed.
+# =============================================================================
+
+
+[[appliance]]
+id = "kettle"
+name = "Kettle"
+plug = "plug_kettle"
+protected = false
+heating = true
+train = true
+left_on_rule = false
+standby_rule = false
+
+
+[[appliance]]
+id = "desk_fan"
+name = "Desk fan"
+plug = ""
+protected = false
+heating = false
+train = true
+left_on_rule = false
+standby_rule = true
+
+
+[[appliance]]
+id = "incandescent_lamp"
+name = "Incandescent lamp"
+plug = "plug_lamp"
+protected = false
+heating = false
+train = true
+left_on_rule = true
+standby_rule = true
+
+
+[[appliance]]
+id = "led_bulb"
+name = "LED bulb"
+plug = "plug_led"
+protected = false
+heating = false
+train = true
+left_on_rule = false
+standby_rule = true
+
+
+[[appliance]]
+id = "laptop_charger"
+name = "Laptop charger"
+plug = "plug_laptop"
+protected = true
+heating = false
+train = true
+left_on_rule = false
+standby_rule = false
