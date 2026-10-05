@@ -1,8 +1,12 @@
 <div align="center">
     <img src="images/SmartWatt_Icon.png" alt="SmartWatt Logo" width="200" height="200"/>
     <h1>SmartWatt</h1>
-    <h3><em>See which appliance is using your electricity, what it costs you, and switch it off automatically. All of it from one clip-on sensor</em></h3>
+    <h3><em>No need for multiple smart plugs—SmartWatt monitors every appliance on your extension strip from a single point.</em></h3>
 </div>
+
+<p align="center">
+    <strong>See which appliance is using your electricity, what it costs you, and switch it off automatically. All of it from one clip-on sensor.</strong>
+</p>
 
 <p align="center">
   <img src="https://img.shields.io/badge/ESP32--S3-Firmware-E7352C?style=for-the-badge&logo=espressif&logoColor=white" />
@@ -37,7 +41,11 @@ SmartWatt is a small do-it-yourself energy monitor. You clip a sensor around **o
 Everything runs on **your own laptop**. There is no cloud, no account and no subscription.
 
 <p align="center">
-  <img src="images/Hardware.png" alt="The SmartWatt hardware, prototype">
+  <img src="images/Overview.png" alt="The SmartWatt hardware, prototype">
+</p>
+
+<p align="center">
+  <img src="images/Control_Countless_Appliances.gif" alt="Control countless appliances">
 </p>
 
 <p align="center">
@@ -461,7 +469,7 @@ Make each connection below and tick it off. "→" means "one wire (or one compon
 | ☐ | **N2** | → | a **100 nF** capacitor → the **BIAS** rail |
 | ☐ | **N2** | → | MCP3208 pin **3** (CH2) |
 
-![Overview](images/Overview.png)
+![Overview](images/Hardware.png)
 
 **Clamp the SCT-013-020 and SCT-013-005 onto the Live Wire of Extension Socket**
 
