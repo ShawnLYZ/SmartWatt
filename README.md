@@ -31,7 +31,7 @@
 
 # What is SmartWatt?
 
-SmartWatt is a small do-it-yourself energy monitor. You clip a sensor around **one wire** (you never cut or open anything), and SmartWatt works out **which appliance just switched on**: the kettle, the fan, the lamp. It does this from the appliance's electrical "fingerprint". It then shows you:
+SmartWatt is a small do-it-yourself energy monitor. You clip a sensor around **one wire** (nothing is ever wired into the mains), and SmartWatt works out **which appliance just switched on**: the kettle, the fan, the lamp. It does this from the appliance's electrical "fingerprint". It then shows you:
 
 - **how much power** each appliance is using right now;
 - **what it costs** on your electricity bill. SmartWatt understands Sarawak Energy's *Tariff D*, where using a little more in a month can move the **whole month** into a more expensive price band. SmartWatt warns you before you cross that line;
@@ -141,6 +141,8 @@ flowchart TB
                         └── smart plugs (optional) ◄── SmartWatt switches them
 ```
 
+The line splitter is optional. Without one, the sensors clip around the live wire inside the power strip's own cable ([Step 2.6](#step-26-prepare-the-live-wire-for-the-sensors)).
+
 1. **Measuring.** The sensor board measures the voltage and the current 4,000 times a second.
 2. **Noticing a change.** When the total power suddenly jumps up or down, something was switched on or off.
 3. **Recognising it.** SmartWatt compares the jump's electrical fingerprint (14 measurements, such as how much power, how "spiky" the current is, and how big the start-up surge is) with fingerprints you taught it in [Part 8](#part-8-train-smartwatt-to-recognise-your-appliances). If nothing matches well enough, it honestly says **"unknown"** instead of guessing.
@@ -152,10 +154,10 @@ SmartWatt monitors **everything plugged into one power strip**. It does not moni
 
 ## Safety first: read this before anything else
 
-⚠️ Mains electricity (240 V) **can kill you**. SmartWatt is designed so that **you never touch, cut or open anything connected to mains**. Keep it that way.
+⚠️ Mains electricity (240 V) **can kill you**. SmartWatt is designed so that **you never touch bare mains metal, and never cut or open anything while it is plugged in**. Keep it that way.
 
 - **Nothing on your breadboard ever connects to mains.** Its only inputs are the low-voltage output of a 9 V AC adapter and the tiny signals from the clip-on sensors.
-- **Never cut, strip or open** a cable, plug, socket or fuse box. The clip-on sensor goes around one wire of a **line splitter** (a ready-made product, see the shopping list). Never make your own by cutting an extension cable.
+- **Never open** a plug, socket or fuse box, and **never cut into the insulation of an individual wire**. The clip-on sensors go around the **live wire only**: either the loop of a ready-made **line splitter** (item 17), or, if you don't buy one, the brown wire inside the power strip's cable after stripping back its **outer jacket only**, with the power strip **unplugged** ([Step 2.6](#step-26-prepare-the-live-wire-for-the-sensors)). The line splitter is the safer choice: once the jacket is removed, only the wires' own thin insulation stands between you and 240 V.
 - **Only use the SCT-013-005 and SCT-013-020 current sensors** (or the -010 / -030 substitutes). **Never use the SCT-013-000.** It has no built-in protection resistor, and it can produce dangerous voltages when unplugged while clipped on.
 - **Use an RCD** (a portable safety switch, 30 mA) between the wall and everything else. Press its **TEST** button at the start of every session: it must switch off. Then reset it.
 - **Power the ESP32 board only from your laptop's USB port.**
@@ -197,7 +199,7 @@ Everything below is for **one** SmartWatt. Search for the part names on Shopee o
 | # | Item | Qty | What it's for |
 |---|---|---|---|
 | 16 | **Portable RCD** plug adapter, 30 mA (SIRIM approved) | 1 | Cuts the power in milliseconds if current leaks to earth |
-| 17 | **AC line splitter** with a UK/Malaysian (BS 1363) plug | 1 | Separates the live wire into a loop you can clip the sensors around, safely. **Use the ×1 loop, not the ×10 loop** |
+| 17 | **AC line splitter** with a UK/Malaysian (BS 1363) plug, *optional* | 1 | Separates the live wire into a loop you can clip the sensors around, without cutting anything. **Use the ×1 loop, not the ×10 loop.** No splitter? Strip back the outer jacket of the power strip's cable and clip around the live wire alone instead ([Step 2.6](#step-26-prepare-the-live-wire-for-the-sensors)). The splitter is the safer choice |
 | 18 | Power strip (extension socket) | 1 | Everything plugged in here is what SmartWatt monitors |
 | 19 | Multimeter (with AC volts, DC volts and continuity/beep) | 1 | Checks your parts and wiring |
 | 20 | **Plug-in energy meter** (shows volts, amps and watts) | 1 | Your reference for calibration in Part 5. Safest option: no probes near mains |
@@ -471,10 +473,6 @@ Make each connection below and tick it off. "→" means "one wire (or one compon
 
 ![Overview](images/Hardware.png)
 
-**Clamp the SCT-013-020 and SCT-013-005 onto the Live Wire of Extension Socket**
-
-![Clamp](images/Clamp.png)
-
 **Two things people get wrong:**
 
 - The sensors' **sleeves**, adapter terminal **B**, and the three **filter capacitors** on N0, N1 and N2 all go to **BIAS, not GND**. That is what lets the board measure both halves of the AC wave.
@@ -498,6 +496,32 @@ Then plug **only** the USB cable (laptop ↔ ESP32, into the port labelled **UAR
 - BIAS rail: **half of the 3V3 reading**. For example 1.650 V if 3V3 reads 3.300 V. It should be within about **±0.005 V** of exactly half. If it's further off, swap in a better-matched pair of 10 kΩ resistors.
 
 Unplug the USB again. Well done: the hard part is over.
+
+### Step 2.6: Prepare the live wire for the sensors
+
+Both current sensors clip around the **live wire alone**. Around a whole cable they read nothing, because the current going out on the live wire and the current coming back on the neutral wire cancel each other out. There are two ways to reach the live wire.
+
+**With a line splitter (item 17):** nothing to do here. The splitter brings the live wire out as a loop, and you clip the sensors around it in Step 5.1.
+
+**Without a line splitter:** strip back the outer jacket of the power strip's own cable and clip the sensors around the live wire inside. ⚠️ Do all of this with the power strip **unplugged from the wall**.
+
+1. Use a power strip you can **dedicate to SmartWatt**. Choose a straight stretch of its cable, well away from the plug and from the strip itself.
+2. Cut **only the outer jacket**, over about 10 cm, and peel it back. Work slowly with a cable-sheath stripper or a sharp knife, and cut shallow: the blade must never reach the wires inside.
+3. **Inspect the three wires inside.** Their own coloured insulation must be **completely undamaged**: no cuts, no nicks, no copper showing. If you find any damage, don't use this power strip.
+4. Separate the **brown** wire (**live**) from the **blue** (neutral) and **green-and-yellow** (earth) wires. **Never cut or strip any of the three wires themselves.** You can bundle the blue and green-and-yellow wires together with tape or a plastic sleeve to keep them out of the way, as in the photo below.
+5. Wrap insulating tape around each cut end of the jacket so it can't slide back or peel further.
+6. Label the power strip **"SmartWatt only"** and don't return it to everyday use.
+
+In Step 5.1 you clip both sensors around the brown wire alone, like this:
+
+![Both current sensors clipped around the brown live wire, with the cable's outer jacket stripped back](images/Clamp.png)
+
+The jacket was the cable's protective layer. Without it, only the wires' thin insulation separates you from 240 V, so **every time you use it**:
+
+- Keep the stripped section flat on a dry table. Don't bend it sharply, pull on it, step on it, or let it rub on sharp edges.
+- Look over the three wires before plugging in. If you see any damage, stop and don't use it.
+- Clip, move or remove the sensors only while the power strip is unplugged.
+- Always plug the power strip in through the RCD.
 
 ---
 
@@ -639,10 +663,12 @@ Calibration teaches SmartWatt the exact behaviour of **your** adapter and sensor
 
 ### Step 5.1: Set up the monitored power strip
 
-Connect, in this order: **wall socket → RCD → plug-in energy meter → line splitter → power strip**.
+Connect, in this order: **wall socket → RCD → plug-in energy meter → line splitter (if you have one) → power strip**. Leave the RCD **unplugged from the wall** for now.
 
-1. Press the RCD's **TEST** button: it must switch off. Reset it.
-2. Clip **both** current sensors around the line splitter's **×1** loop, **facing the same way**. Leave the ×10 loop empty.
+1. Clip **both** current sensors around the **live wire**, **facing the same way**:
+   - **With a line splitter:** around its **×1** loop. Leave the ×10 loop empty.
+   - **Without one:** around the **brown wire** of the power strip's cable that you prepared in [Step 2.6](#step-26-prepare-the-live-wire-for-the-sensors). Never around the whole cable.
+2. Plug the RCD into the wall and press its **TEST** button: it must switch off. Reset it.
 3. Plug the sensors' 3.5 mm plugs into their breakout boards (005 → channel 1 board, 020 → channel 2 board).
 4. Plug the **AC adapter** into an ordinary wall socket and connect its barrel plug to the breakout (terminals A/B).
 5. Plug the ESP32 into the laptop's USB.
@@ -962,6 +988,7 @@ SmartWatt only records while the laptop, the hotspot and both windows are runnin
 | No status lines appear at all | The AC adapter isn't connected or powered. The board measures in step with the mains voltage, so it needs the adapter |
 | `vclip` keeps increasing | The voltage signal is too big: check the 10 kΩ / 820 Ω voltage wiring (Part 2) |
 | **P** is negative | Step 5.3 (swap adapter wires, or turn a sensor around) |
+| **Irms** stays near 0 with a load switched on | The sensors must go around the live wire alone, not the whole cable (Step 2.6). Check that each sensor is clicked fully shut and its plug is pushed fully into its breakout board |
 | Everything shows as `unknown_1`, `unknown_2`… | Not trained yet, the fingerprints weren't uploaded (Step 8.4), you re-calibrated after training, or the appliance changes power by less than ~8 W |
 | The hotspot keeps switching itself off | Turn off **Power saving** in the Mobile hotspot settings |
 | Cost per hour shows **RM 0.00** | Normal early in the month (see the tip at the end of Part 1) |
