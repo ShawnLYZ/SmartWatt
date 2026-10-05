@@ -2,3 +2,4 @@
 # parses them in C. Git must not rewrite their line endings on checkout.
 firmware/test/fixtures/*.csv -text
 firmware/test/fixtures/*.sidecar.json -text
+*.gif filter=lfs diff=lfs merge=lfs -text
