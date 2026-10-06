@@ -56,6 +56,16 @@ Everything runs on **your own laptop**. There is no cloud, no account and no sub
 
 ---
 
+# Demo Video
+
+<p align="center">
+  <a href="https://youtu.be/XGHBUpMBcS8">
+    <img src="https://markdown-videos-api.jorgenkh.no/url?url=https%3A%2F%2Fyoutu.be%2FXGHBUpMBcS8" alt="SmartWatt" width="80%">
+  </a>
+</p>
+
+---
+
 # 🏗️ System Architecture
 
 ```mermaid
